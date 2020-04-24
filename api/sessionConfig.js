@@ -4,14 +4,15 @@ const knexSessionStore = require("connect-session-knex")(session);
 
 const sessionConfig = {
   name: "raza-session",
-  secret: process.env.SECRETKEY,
+  secret: "slslellslse",
   cookie: {
     maxAge: 3600 * 1000,
     secure: false,
     httpOnly: true,
+    domain: "google.com",
   },
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
 
   store: new knexSessionStore({
     knex: require("../database/dbConfig.js"),

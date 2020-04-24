@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Cookies from "js-cookie";
+
+import AuthApi from "../AuthApi";
 
 export default class dashboard extends Component {
   constructor(props) {
@@ -10,6 +13,8 @@ export default class dashboard extends Component {
       userList: [],
     };
   }
+
+  static contextType = AuthApi;
 
   componentDidMount() {
     axios
@@ -24,10 +29,14 @@ export default class dashboard extends Component {
 
   logout = (e) => {
     e.preventDefault();
+    const Auth = this.context;
     axios
       .get("http://localhost:5300/api/auth/logout")
       .then((res) => {
-        console.log(res);
+        console.log("logout: ", res);
+        Auth.setAuth(false);
+        // Cookies.remove("user");
+        localStorage.setItem("logoutMessage", res.data);
         this.props.history.push("/");
       })
       .catch((err) => console.log("logout", err));

@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { withFormik, Form, Field } from "formik";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 function login() {
   return (
@@ -42,10 +43,12 @@ const LoginWithFormik = withFormik({
     };
   },
 
-  handleSubmit(values, { props, resetForm }) {
+  handleSubmit: (values, { props, resetForm }) => {
     axios
       .post("http://localhost:5300/api/auth/login", values)
       .then((res) => {
+        props.myAuth(true);
+        // Cookies.set("name", "LoginTrue");
         localStorage.setItem("welcome", res.data.message);
         props.history.push("/dashboard");
       })

@@ -11,11 +11,11 @@ const server = express();
 configMiddleware(server);
 configSession(server);
 
+server.use("/api/auth", authRouter);
+server.use("/api/users", restrictedRoute, userRouter);
+
 server.get("/api", (req, res) => {
   res.send(`The api on server is running`);
 });
-
-server.use("/api/auth", authRouter);
-server.use("/api/users", restrictedRoute, userRouter);
 
 module.exports = server;
