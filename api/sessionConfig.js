@@ -6,10 +6,9 @@ const sessionConfig = {
   name: "raza-session",
   secret: "slslellslse",
   cookie: {
-    maxAge: 3600 * 1000,
+    maxAge: 36000 * 1000,
     secure: false,
     httpOnly: true,
-    domain: "google.com",
   },
   resave: false,
   saveUninitialized: true,

@@ -31,7 +31,7 @@ export default class dashboard extends Component {
     e.preventDefault();
     const Auth = this.context;
     axios
-      .get("http://localhost:5300/api/auth/logout")
+      .get("http://localhost:5301/api/auth/logout")
       .then((res) => {
         console.log("logout: ", res);
         Auth.setAuth(false);
